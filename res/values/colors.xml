@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="blue_title">#349AFF</color>
+    <color name="black_bottom_bar">#000000</color>
+    <color name="grey_bottom_bar">#A6666666</color>
     
 </resources>
