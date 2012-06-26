@@ -4,10 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.R.anim;
+import android.app.Application;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import com.gmail.yuyang226.flickr.photos.GeoData;
+import com.gmail.yuyang226.flickr.photos.Photo;
+import com.gmail.yuyang226.flickr.photos.PhotoList;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.ItemizedOverlay;
 import com.google.android.maps.MapActivity;
@@ -24,11 +28,14 @@ public class StadtgefluesterMapActivity extends MapActivity {
 	private final static GeoPoint TEST_LOCATION2 = new GeoPoint((int)(53.063252*1E6), (int)(8.811057*1E6));
 	private HelloItemizedOverlay itemizedoverlay;
 	private List<Overlay> mapOverlays;
+	private StadtgefluesterApplication stadtgefluesterApplication;
 	
 	@Override
 	protected void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
 		this.setContentView(R.layout.map_screen);
+		this.stadtgefluesterApplication = (StadtgefluesterApplication) this.getApplication();
+		
 		
 		MapView mapView = (MapView) findViewById(R.id.mv_maps_screens);
 	    mapView.setSatellite(false);
@@ -39,16 +46,20 @@ public class StadtgefluesterMapActivity extends MapActivity {
 	    this.mapOverlays = mapView.getOverlays();
 	    addOverlays();
 	    this.mapController.animateTo(STANDARD_LOCATION);
+	    
 	}
 	
 	private void addOverlays() {
 		Drawable drawable = this.getResources().getDrawable(R.drawable.androidmarker);
 		itemizedoverlay = new HelloItemizedOverlay(drawable);
-		OverlayItem overlayitem1 = new OverlayItem(TEST_LOCATION1, "Hola, Mundo!", "I'm in Mexico City!");
-		OverlayItem overlayitem2 = new OverlayItem(TEST_LOCATION2, "Hola, Mundo!", "I'm in Mexico City!");
+		PhotoList photoList = stadtgefluesterApplication.getPhotoList();
 		
-		itemizedoverlay.addOverlay(overlayitem1);
-		itemizedoverlay.addOverlay(overlayitem2);
+		for (Photo photo : photoList) {
+			GeoData geoData = photo.getGeoData();
+			GeoPoint geoPoint = new GeoPoint((int)(geoData.getLatitude()*1E6), (int)(geoData.getLongitude()*1E6));
+			OverlayItem overlayItem = new OverlayItem(geoPoint, photo.getId(), "test");
+			itemizedoverlay.addOverlay(overlayItem);
+		}
 		mapOverlays.add(itemizedoverlay);
 	}
 
