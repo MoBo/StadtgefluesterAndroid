@@ -38,9 +38,8 @@ public class PhotoSearchTask extends AsyncTask<OAuth, Void, PhotoList>{
 				token.getOauthTokenSecret());
 		SearchParameters searchParameters = new SearchParameters();
 		searchParameters.setTags(new String[]{StadtgefluesterApplication.PHOTO_SEARCH_TAG});
-		//searchParameters.setLatitude(StadtgefluesterApplication.PHOTO_SEARCH_LAT);
-		//searchParameters.setLongitude(StadtgefluesterApplication.PHOTO_SEARCH_LON);
-		//searchParameters.setAccuracy(StadtgefluesterApplication.PHOTO_SEARCH_ACCURACY);
+		
+
 		try {
 			PhotoList photoList = flickr.getPhotosInterface().search(searchParameters, 50, 1);
 			//PhotoList newPhotoList =  new PhotoList();

@@ -1,5 +1,8 @@
 package bode.moritz.stadtgefluester;
 
+import java.util.HashMap;
+import java.util.List;
+
 import javax.xml.parsers.ParserConfigurationException;
 
 import android.app.Application;
@@ -14,7 +17,9 @@ import com.gmail.yuyang226.flickr.RequestContext;
 import com.gmail.yuyang226.flickr.oauth.OAuth;
 import com.gmail.yuyang226.flickr.oauth.OAuthToken;
 import com.gmail.yuyang226.flickr.people.User;
+import com.gmail.yuyang226.flickr.photos.Photo;
 import com.gmail.yuyang226.flickr.photos.PhotoList;
+import com.gmail.yuyang226.flickr.photos.comments.Comment;
 
 public class StadtgefluesterApplication extends Application {
 
@@ -29,15 +34,20 @@ public class StadtgefluesterApplication extends Application {
 	public static final String PHOTO_SEARCH_TAG = "stadtgefluester";
 	public static final String PHOTO_SEARCH_LAT = "53.06268";
 	public static final String PHOTO_SEARCH_LON = "8.806658";
-	public static final int PHOTO_SEARCH_ACCURACY = 10;
+	public static final int PHOTO_SEARCH_ACCURACY = 13;
 	
 	private static final String STADTGEFLUESTER_PREFERENCES = "stadtgefluester_prefs";
 	private static final String KEY_OAUTH_TOKEN = "key_oauth_token";
 	private static final String KEY_TOKEN_SECRET = "key_token_secret";
 	private static final String KEY_USER_NAME = "key_user_name";
 	private static final String KEY_USER_ID = "key_user_id";
-
+	public static final String PHOTO_ID_STRING = "photo_id_string";
+	private HashMap<String, List<Comment>> commenthashMap = new HashMap<String, List<Comment>>();
 	private PhotoList photoList;
+	
+	public void addCommentHash(String id, List<Comment> comment) {
+		commenthashMap.put(id, comment);
+	}
 
 	public OAuth getOAuthToken() {
 		// Restore preferences
@@ -100,6 +110,20 @@ public class StadtgefluesterApplication extends Application {
 
 	public PhotoList getPhotoList() {
 		return photoList;
+	}
+
+	public void replacePhotoInList(Photo tmp) {
+		int i = photoList.indexOf(tmp);
+		photoList.set(i, tmp);
+	}
+
+	public Photo getPhotoById(String photoID) {
+		for (Photo photo : this.photoList) {
+			if(photo.getId().equals(photoID)){
+				return photo;
+			}
+		}
+		return null;
 	}
 	
 }
