@@ -1,6 +1,7 @@
 package bode.moritz.stadtgefluester.task;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import org.json.JSONException;
@@ -15,6 +16,7 @@ import com.gmail.yuyang226.flickr.oauth.OAuthToken;
 import com.gmail.yuyang226.flickr.photos.Photo;
 import com.gmail.yuyang226.flickr.photos.PhotoList;
 import com.gmail.yuyang226.flickr.photos.PhotosInterface;
+import com.gmail.yuyang226.flickr.photos.Size;
 import com.gmail.yuyang226.flickr.photos.comments.Comment;
 
 import android.app.Activity;
@@ -62,6 +64,7 @@ public class PhotoDetailsTask extends AsyncTask<OAuth, Void, Photo> {
 		try {
 			
 			Photo tmp = photosInterface.getInfo(photo.getId(), "");
+			InputStream inputStream = photosInterface.getImageAsStream(tmp, Size.SMALL);
 			List<Comment> commentlist = flickr.getCommentsInterface().getList(tmp.getId(), null, null);			
 			application.addCommentHash(photo.getId(), commentlist);
 			application.replacePhotoInList(tmp);

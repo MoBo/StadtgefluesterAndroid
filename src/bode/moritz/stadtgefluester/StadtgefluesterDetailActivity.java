@@ -3,18 +3,27 @@ package bode.moritz.stadtgefluester;
 import java.util.ArrayList;
 import java.util.List;
 
+
+import bode.moritz.stadtgefluester.task.imagedownloadtask.ImageDownloadTask;
+import bode.moritz.stadtgefluester.task.imagedownloadtask.ImageUtils.DownloadedDrawable;
+
+
+
 import com.gmail.yuyang226.flickr.photos.Photo;
 import com.gmail.yuyang226.flickr.photos.comments.Comment;
+
 
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -22,6 +31,7 @@ import android.widget.TextView;
 public class StadtgefluesterDetailActivity extends Activity {
 	private StadtgefluesterApplication stadtgefluesterapplication;
 	private String photoID = "";
+	private Photo photo = null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {		
 		super.onCreate(savedInstanceState);
@@ -29,16 +39,27 @@ public class StadtgefluesterDetailActivity extends Activity {
 		stadtgefluesterapplication = (StadtgefluesterApplication) getApplication();
 		this.photoID = getIntent().getStringExtra(
 				StadtgefluesterApplication.PHOTO_ID_STRING);
+		photo = stadtgefluesterapplication.getPhotoById(photoID);		
 		setViewContent();
 	}
 
+	private void downloadImage() {
+		ImageView image=(ImageView) findViewById(R.id.iv_detail_view_top);                
+        if (image != null) {
+        	ImageDownloadTask task = new ImageDownloadTask(image);
+            Drawable drawable = new DownloadedDrawable(task);
+            image.setImageDrawable(drawable);
+            task.execute(photo.getMediumUrl());
+        }
+	}
+
 	private void setViewContent() {
+		downloadImage();
 		setTitle();
 		populateListViewCOntent();
 	}
 	
 	private void setTitle() {		
-		Photo photo = stadtgefluesterapplication.getPhotoById(photoID);
 		TextView textViewTitle = (TextView) findViewById(R.id.tv_detail_view_title);
 		textViewTitle.setText(photo.getTitle());
 	}
