@@ -68,6 +68,7 @@ public class PhotoSearchTask extends AsyncTask<OAuth, Void, PhotoList>{
 		stadtgefluesterApplication.setPhotoList(result);
 		Intent intent = new Intent(activity,StadtgefluesterMapActivity.class);
 		activity.startActivity(intent);
+		activity.finish();
 	}
 
 }

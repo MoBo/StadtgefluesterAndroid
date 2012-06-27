@@ -76,10 +76,10 @@ public class StadtgefluesterDetailActivity extends Activity {
 				TextView tt = (TextView) v.findViewById(R.id.tv_comment_author);
 				TextView bt = (TextView) v.findViewById(R.id.tv_comment_text);
 				if (tt != null) {
-					tt.setText(o.getAuthor() + ": ");
+					tt.setText(o.getAuthorName() + ": ");
 				}
 				if (bt != null) {
-					bt.setText(o.getText() + ": ");
+					bt.setText(o.getText());
 				}
 			}
 			return v;
