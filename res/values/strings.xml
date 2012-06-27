@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="information">Information</string>
     <string name="splashscreeen_title">Stadtgeflüster</string>
     <string name="app_name">Stadtgefluester</string>
     <string name="google_maps_api_key">0O5gJwvaJN5x915PzyvkE96Ep4EW8QxzNFUNNOg</string>

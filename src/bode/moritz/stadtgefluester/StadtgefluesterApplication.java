@@ -125,5 +125,10 @@ public class StadtgefluesterApplication extends Application {
 		}
 		return null;
 	}
+
+	public List<Comment> getComments(String photoID) {
+		return commenthashMap.get(photoID);
+		
+	}
 	
 }

@@ -4,6 +4,7 @@
     android:layout_height="match_parent" >
 
     <ImageView
+        android:contentDescription="@string/information"
         android:id="@+id/iv_detail_view_top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -26,78 +27,20 @@
         android:id="@+id/rl_detail_view_comments"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/rl_detail_screen_button_bar"
         android:layout_below="@id/tv_detail_view_title"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp" >
+        
+        <ListView
+        android:id="@+id/lv_comments"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" >
+    	</ListView>
 
-        <LinearLayout
-            android:id="@+id/ll_detail_screen_comment1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <TextView
-                android:id="@+id/textView1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Phil"
-                android:textColor="@color/blue_title"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="sehr schön hier"
-                android:textSize="18sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_detail_screen_comment2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/ll_detail_screen_comment1" >
-
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sido"
-                android:textColor="@color/blue_title"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="Salut"
-                android:textSize="18sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_detail_screen_comment3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/ll_detail_screen_comment2" >
-
-            <TextView
-                android:id="@+id/textView5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="MoBo"
-                android:textColor="@color/blue_title"
-                android:textSize="18sp" />
-
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="geht ab!"
-                android:textSize="18sp" />
-        </LinearLayout>
-    </RelativeLayout>
+   </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/rl_detail_screen_button_bar"
@@ -111,6 +54,7 @@
         android:background="@color/grey_bottom_bar" >
 
         <ImageView
+            android:contentDescription="@string/information"
             android:id="@+id/iv_detail_screen_star"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -119,6 +63,7 @@
             android:src="@drawable/star_icon" />
 
         <ImageView
+            android:contentDescription="@string/information"
             android:id="@+id/iv_detail_screen_share"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -128,6 +73,7 @@
             android:src="@drawable/share_icon" />
 
         <ImageView
+            android:contentDescription="@string/information"
             android:id="@+id/iv_detail_screen_comment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -135,5 +81,7 @@
             android:layout_toRightOf="@+id/iv_detail_screen_share"
             android:src="@drawable/comment_icon" />
     </RelativeLayout>
+
+    
 
 </RelativeLayout>
