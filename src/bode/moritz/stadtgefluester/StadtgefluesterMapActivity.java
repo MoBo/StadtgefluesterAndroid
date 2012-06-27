@@ -28,11 +28,7 @@ public class StadtgefluesterMapActivity extends MapActivity {
 
 	private MapController mapController;
 	private final static GeoPoint STANDARD_LOCATION = new GeoPoint(
-			(int) (53.063036 * 1E6), (int) (8.80831 * 1E6));
-	private final static GeoPoint TEST_LOCATION1 = new GeoPoint(
-			(int) (53.062521 * 1E6), (int) (8.805478 * 1E6));
-	private final static GeoPoint TEST_LOCATION2 = new GeoPoint(
-			(int) (53.063252 * 1E6), (int) (8.811057 * 1E6));
+			(int) (53.079435 * 1E6), (int) (8.805456 * 1E6));	
 	private HelloItemizedOverlay itemizedoverlay;
 	private List<Overlay> mapOverlays;
 	private StadtgefluesterApplication stadtgefluesterApplication;
@@ -49,7 +45,7 @@ public class StadtgefluesterMapActivity extends MapActivity {
 		mapView.setSatellite(false);
 
 		this.mapController = mapView.getController();
-		this.mapController.setZoom(17);
+		this.mapController.setZoom(14);
 
 		this.mapOverlays = mapView.getOverlays();
 		addOverlays();
@@ -59,7 +55,7 @@ public class StadtgefluesterMapActivity extends MapActivity {
 
 	private void addOverlays() {
 		Drawable drawable = this.getResources().getDrawable(
-				R.drawable.androidmarker);
+				R.drawable.pin);
 		itemizedoverlay = new HelloItemizedOverlay(drawable);
 		PhotoList photoList = stadtgefluesterApplication.getPhotoList();
 
