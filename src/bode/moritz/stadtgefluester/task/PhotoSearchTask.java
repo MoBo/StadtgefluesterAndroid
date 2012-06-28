@@ -3,6 +3,7 @@ package bode.moritz.stadtgefluester.task;
 import java.io.IOException;
 
 import org.json.JSONException;
+import java.io.InputStream;
 
 import bode.moritz.stadtgefluester.SplashscreenActivity;
 import bode.moritz.stadtgefluester.StadtgefluesterApplication;
@@ -19,35 +20,44 @@ import com.gmail.yuyang226.flickr.photos.SearchParameters;
 
 import android.app.Application;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 
-public class PhotoSearchTask extends AsyncTask<OAuth, Void, PhotoList>{
+public class PhotoSearchTask extends AsyncTask<OAuth, Void, PhotoList> {
 
-	
 	private SplashscreenActivity activity;
 	private StadtgefluesterApplication stadtgefluesterApplication;
-	
+
 	public PhotoSearchTask(SplashscreenActivity activity) {
 		this.activity = activity;
-		this.stadtgefluesterApplication = (StadtgefluesterApplication) activity.getApplication();
+		this.stadtgefluesterApplication = (StadtgefluesterApplication) activity
+				.getApplication();
 	}
+
 	@Override
 	protected PhotoList doInBackground(OAuth... params) {
 		OAuthToken token = params[0].getToken();
-		Flickr flickr = stadtgefluesterApplication.getFlickrAuthed(token.getOauthToken(), 
-				token.getOauthTokenSecret());
+		Flickr flickr = stadtgefluesterApplication.getFlickrAuthed(
+				token.getOauthToken(), token.getOauthTokenSecret());
 		SearchParameters searchParameters = new SearchParameters();
-		searchParameters.setTags(new String[]{StadtgefluesterApplication.PHOTO_SEARCH_TAG});
-		
+		searchParameters
+				.setTags(new String[] { StadtgefluesterApplication.PHOTO_SEARCH_TAG });
 
 		try {
-			PhotoList photoList = flickr.getPhotosInterface().search(searchParameters, 50, 1);
-			//PhotoList newPhotoList =  new PhotoList();
+			PhotoList photoList = flickr.getPhotosInterface().search(
+					searchParameters, 50, 1);
+			
 			for (Photo photo : photoList) {
-				GeoData geoData = flickr.getGeoInterface().getLocation(photo.getId());
+				GeoData geoData = flickr.getGeoInterface().getLocation(
+						photo.getId());
 				photo.setGeoData(geoData);
-//				Photo newPhoto = flickr.getPhotosInterface().getInfo(photo.getId(), "");
-//				newPhotoList.add(newPhoto);
+				
+				/*Download Picture Thumbnails and add to Collection*/
+				@SuppressWarnings("deprecation")
+				InputStream is = photo.getSmallSquareAsInputStream();
+				Drawable tmp = Drawable.createFromStream(is, "src");
+				stadtgefluesterApplication.addPhotoThumbNail(tmp);
+
 			}
 			return photoList;
 		} catch (IOException e) {
@@ -62,11 +72,11 @@ public class PhotoSearchTask extends AsyncTask<OAuth, Void, PhotoList>{
 		}
 		return null;
 	}
-	
+
 	@Override
 	protected void onPostExecute(PhotoList result) {
 		stadtgefluesterApplication.setPhotoList(result);
-		Intent intent = new Intent(activity,StadtgefluesterMapActivity.class);
+		Intent intent = new Intent(activity, StadtgefluesterMapActivity.class);
 		activity.startActivity(intent);
 		activity.finish();
 	}

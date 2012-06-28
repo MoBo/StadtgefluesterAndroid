@@ -1,5 +1,6 @@
 package bode.moritz.stadtgefluester;
 
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +51,7 @@ public class StadtgefluesterDetailActivity extends Activity {
             Drawable drawable = new DownloadedDrawable(task);
             image.setImageDrawable(drawable);
             task.execute(photo.getMediumUrl());
+            
         }
 	}
 

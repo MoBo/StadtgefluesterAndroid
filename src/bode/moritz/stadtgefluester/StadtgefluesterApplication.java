@@ -1,5 +1,6 @@
 package bode.moritz.stadtgefluester;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 
 import com.gmail.yuyang226.flickr.Flickr;
@@ -44,6 +46,8 @@ public class StadtgefluesterApplication extends Application {
 	public static final String PHOTO_ID_STRING = "photo_id_string";
 	private HashMap<String, List<Comment>> commenthashMap = new HashMap<String, List<Comment>>();
 	private PhotoList photoList;
+
+	private ArrayList<Drawable> photothumbnaillist = new ArrayList<Drawable>();
 	
 	public void addCommentHash(String id, List<Comment> comment) {
 		commenthashMap.put(id, comment);
@@ -129,6 +133,18 @@ public class StadtgefluesterApplication extends Application {
 	public List<Comment> getComments(String photoID) {
 		return commenthashMap.get(photoID);
 		
+	}
+
+	public void addPhotoThumbNail(Drawable tmp) {
+		getPhotothumbnaillist().add(tmp);		
+	}
+
+	public ArrayList<Drawable> getPhotothumbnaillist() {
+		return photothumbnaillist;
+	}
+
+	public void setPhotothumbnaillist(ArrayList<Drawable> photothumbnaillist) {
+		this.photothumbnaillist = photothumbnaillist;
 	}
 	
 }

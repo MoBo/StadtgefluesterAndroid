@@ -54,11 +54,13 @@ public class StadtgefluesterMapActivity extends MapActivity {
 	}
 
 	private void addOverlays() {
+		PhotoList photoList = stadtgefluesterApplication.getPhotoList();
 		Drawable drawable = this.getResources().getDrawable(
 				R.drawable.pin);
 		itemizedoverlay = new HelloItemizedOverlay(drawable);
-		PhotoList photoList = stadtgefluesterApplication.getPhotoList();
-
+		
+		int i = 0;
+		ArrayList<Drawable> thumbnaildrawables = stadtgefluesterApplication.getPhotothumbnaillist();
 		for (Photo photo : photoList) {
 			GeoData geoData = photo.getGeoData();
 			GeoPoint geoPoint = new GeoPoint(
@@ -66,8 +68,13 @@ public class StadtgefluesterMapActivity extends MapActivity {
 					(int) (geoData.getLongitude() * 1E6));
 			OverlayItem overlayItem = new OverlayItem(geoPoint, photo.getId(),
 					"test");
+			/*Add Picture-Thumbnails to Overlay Item*/
+			Drawable thumbnail = thumbnaildrawables.get(i);
+			thumbnail.setBounds(0, 0, thumbnail.getIntrinsicWidth(), thumbnail.getIntrinsicHeight());
+			overlayItem.setMarker(thumbnail);
 			itemizedoverlay.addOverlay(overlayItem);
-		}
+			i++;
+		}		
 		mapOverlays.add(itemizedoverlay);
 	}
 
@@ -80,7 +87,8 @@ public class StadtgefluesterMapActivity extends MapActivity {
 	public class HelloItemizedOverlay extends ItemizedOverlay<OverlayItem> {
 
 		private ArrayList<OverlayItem> mOverlays = new ArrayList<OverlayItem>();
-
+		
+		
 		public HelloItemizedOverlay(Drawable defaultMarker) {
 			super(boundCenterBottom(defaultMarker));
 		}
