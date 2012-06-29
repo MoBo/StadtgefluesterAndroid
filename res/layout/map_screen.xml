@@ -18,7 +18,9 @@
         android:layout_height="60dp"
         android:layout_below="@id/mv_maps_screens"
         android:layout_marginTop="-60dp"
-        android:background="@color/grey_bottom_bar" >
+        android:background="@color/grey_bottom_bar" 
+        android:baselineAligned="false"
+        >
 
         <RelativeLayout
             android:id="@+id/rl_maps_screen_route"

@@ -21,3 +21,4 @@ local.properties
 
 # Settings files
 .settings/
+apiKey.txt

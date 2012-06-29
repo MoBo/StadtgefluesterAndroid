@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_detail_screen"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
@@ -53,32 +54,33 @@
         android:layout_marginRight="5dp"
         android:background="@color/grey_bottom_bar" >
 
-        <ImageView
+        <ImageButton
             android:contentDescription="@string/information"
-            android:id="@+id/iv_detail_screen_star"
+            android:id="@+id/ib_detail_screen_star"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/iv_detail_screen_share"
+            android:layout_toLeftOf="@+id/ib_detail_screen_share"
             android:src="@drawable/star_icon" />
 
-        <ImageView
-            android:contentDescription="@string/information"
-            android:id="@+id/iv_detail_screen_share"
+        <ImageButton
+            android:id="@+id/ib_detail_screen_share"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
+            android:layout_centerVertical="false"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
+            android:contentDescription="@string/information"
             android:src="@drawable/share_icon" />
 
-        <ImageView
+        <ImageButton
             android:contentDescription="@string/information"
-            android:id="@+id/iv_detail_screen_comment"
+            android:id="@+id/ib_detail_screen_comment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/iv_detail_screen_share"
+            android:layout_toRightOf="@+id/ib_detail_screen_share"
             android:src="@drawable/comment_icon" />
     </RelativeLayout>
 

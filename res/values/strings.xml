@@ -4,7 +4,12 @@
     <string name="information">Information</string>
     <string name="splashscreeen_title">Stadtgeflüster</string>
     <string name="app_name">Stadtgefluester</string>
-    <string name="google_maps_api_key">0O5gJwvaJN5x915PzyvkE96Ep4EW8QxzNFUNNOg</string>
+    <string name="google_maps_api_key">0rKaLc-slqJNinY67HHh41BV3pCtrKWe5pEkUTg</string>
     <string name="detail_view_title"><u>Alter Güterbahnhof Bremen</u></string>
+    <string name="detail_screen_share_chooser">Share Photo...</string>
+    <string name="detail_screen_comment_cancel_text">Cancel</string>
+    <string name="detail_screen_comment_comment_text">Comment</string>
+    <string name="detail_screen_comment_title">Add a new comment!</string>
+    <string name="detail_screen_comment_favorite">Place has been added to favorites.</string>
 
 </resources>
