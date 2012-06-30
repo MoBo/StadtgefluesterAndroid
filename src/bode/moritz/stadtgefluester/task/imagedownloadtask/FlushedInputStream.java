@@ -7,6 +7,10 @@ import java.io.InputStream;
 /*
  * An InputStream that skips the exact number of bytes provided, unless it reaches EOF.
  */
+/**
+ * @author Toby Yu(yuyang226@gmail.com)
+ *
+ */
 public class FlushedInputStream extends FilterInputStream {
 	public FlushedInputStream(InputStream inputStream) {
 		super(inputStream);

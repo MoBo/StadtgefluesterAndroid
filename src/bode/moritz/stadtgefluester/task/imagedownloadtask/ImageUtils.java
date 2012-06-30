@@ -22,8 +22,10 @@ import android.net.http.AndroidHttpClient;
 import android.util.Log;
 
 
-
-
+/**
+ * @author Toby Yu(yuyang226@gmail.com)
+ *
+ */
 public final class ImageUtils {
 	private static final Logger logger = LoggerFactory.getLogger(ImageUtils.class);
 

@@ -27,7 +27,7 @@ import com.gmail.yuyang226.flickr.oauth.OAuthToken;
 /**
  * Represents the task to start the oauth process.
  * 
- * @author yayu
+ * @author yayu(yuyang226@gmail.com)
  * 
  */
 public class OAuthTask extends AsyncTask<Void, Integer, String> {

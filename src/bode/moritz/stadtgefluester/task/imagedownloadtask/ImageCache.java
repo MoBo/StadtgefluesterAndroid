@@ -8,6 +8,10 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import android.graphics.Bitmap;
 
+/**
+ * @author Toby Yu(yuyang226@gmail.com)
+ *
+ */
 public final class ImageCache {
 
 	private static final Map<String, SoftReference<Bitmap>> cache = new LinkedHashMap<String, SoftReference<Bitmap>>() {

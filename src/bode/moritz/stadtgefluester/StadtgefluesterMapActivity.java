@@ -10,6 +10,10 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.ImageView;
 import bode.moritz.stadtgefluester.task.PhotoDetailsTask;
 
 import com.gmail.yuyang226.flickr.oauth.OAuth;
@@ -33,6 +37,7 @@ public class StadtgefluesterMapActivity extends MapActivity {
 	private List<Overlay> mapOverlays;
 	private StadtgefluesterApplication stadtgefluesterApplication;
 	public Activity a =  this;
+	private ImageView cameraIcon;
 
 	@Override
 	protected void onCreate(Bundle icicle) {
@@ -40,7 +45,7 @@ public class StadtgefluesterMapActivity extends MapActivity {
 		this.setContentView(R.layout.map_screen);
 		this.stadtgefluesterApplication = (StadtgefluesterApplication) this
 				.getApplication();
-
+		
 		MapView mapView = (MapView) findViewById(R.id.mv_maps_screens);
 		mapView.setSatellite(false);
 
@@ -51,6 +56,18 @@ public class StadtgefluesterMapActivity extends MapActivity {
 		addOverlays();
 		this.mapController.animateTo(STANDARD_LOCATION);
 
+		
+		
+		this.cameraIcon = (ImageView) findViewById(R.id.iv_map_screen_camera_icon);
+		this.cameraIcon.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+				intent.putExtra(MediaStore.EXTRA_VIDEO_QUALITY, 1);
+				startActivity(intent);
+			}
+		});
 	}
 
 	private void addOverlays() {
