@@ -84,7 +84,7 @@ public class OAuthTask extends AsyncTask<Void, Integer, String> {
 					OAUTH_CALLBACK_URI.toString());
 			saveTokenSecrent(oauthToken.getOauthTokenSecret());
 			URL oauthUrl = f.getOAuthInterface().buildAuthenticationUrl(
-					Permission.READ, oauthToken);
+					Permission.WRITE, oauthToken);
 			return oauthUrl.toString();
 		} catch (Exception e) {
 			logger.error("Error to oauth", e); //$NON-NLS-1$

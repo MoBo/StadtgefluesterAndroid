@@ -12,6 +12,7 @@
         android:src="@drawable/splash_logo" android:layout_centerHorizontal="true" android:layout_marginTop="125dp"/>
 
     <TextView
+        android:id="@+id/tv_splash_screen_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/iv_splashscreen_logo"
@@ -21,5 +22,14 @@
         android:textColor="@color/blue_title"
         android:textSize="30sp"
         android:textStyle="bold" />
+
+    <ProgressBar
+        android:id="@+id/progressBar1"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_splash_screen_title"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp" />
     
 </RelativeLayout>

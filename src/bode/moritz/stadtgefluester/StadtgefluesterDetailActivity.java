@@ -1,16 +1,12 @@
 package bode.moritz.stadtgefluester;
 
 
-import java.io.IOException;
 import java.util.ArrayList;
-
-import org.json.JSONException;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.AlertDialog.Builder;
-import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -26,16 +22,14 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import bode.moritz.stadtgefluester.task.CommentTask;
+import bode.moritz.stadtgefluester.task.FavoriteTask;
 import bode.moritz.stadtgefluester.task.imagedownloadtask.ImageDownloadTask;
 import bode.moritz.stadtgefluester.task.imagedownloadtask.ImageUtils.DownloadedDrawable;
 
-import com.gmail.yuyang226.flickr.Flickr;
-import com.gmail.yuyang226.flickr.FlickrException;
 import com.gmail.yuyang226.flickr.oauth.OAuth;
 import com.gmail.yuyang226.flickr.photos.Photo;
 import com.gmail.yuyang226.flickr.photos.comments.Comment;
-
-import de.unibremen.util.Util;
 
 @SuppressLint({ "ParserError", "ParserError", "ParserError" })
 public class StadtgefluesterDetailActivity extends Activity {
@@ -51,7 +45,7 @@ public class StadtgefluesterDetailActivity extends Activity {
 	private ListView listview;
 	private CommentAdapter commentAdapter;
 	private ImageButton favoriteButton;
-	private Activity activity = this;
+	private StadtgefluesterDetailActivity activity = this;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {		
@@ -112,27 +106,7 @@ public class StadtgefluesterDetailActivity extends Activity {
 				String commentText = editText.getEditableText().toString();
 				if(commentText!=null&&!"".equals(commentText)){
 					OAuth oAuth = stadtgefluesterapplication.getOAuthToken();
-//					Flickr flickr = stadtgefluesterapplication.getFlickrAuthed(oAuth.getToken().getOauthToken(), oAuth.getToken().getOauthTokenSecret());
-//					String commentId = null;
-//					try {
-						//commentId = flickr.getCommentsInterface().addComment(photo.getId(),commentText);
-						Comment comment = new Comment();
-						//comment.setId(commentId);
-						comment.setText(commentText);
-						comment.setAuthorName(oAuth.getUser().getUsername());
-						comments.add(comment);
-						commentAdapter.notifyDataSetChanged();
-//					} catch (IOException e) {
-//						// TODO Auto-generated catch block
-//						e.printStackTrace();
-//					} catch (FlickrException e) {
-//						// TODO Auto-generated catch block
-//						e.printStackTrace();
-//					} catch (JSONException e) {
-//						// TODO Auto-generated catch block
-//						e.printStackTrace();
-//					}
-//					
+					new CommentTask(photo.getId(),commentText,activity).execute(oAuth);
 				}
 				alertDialog.dismiss();
 			}
@@ -158,7 +132,8 @@ public class StadtgefluesterDetailActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				Util.makeToast(getString(R.string.detail_screen_comment_favorite), activity);
+				OAuth oAuth = stadtgefluesterapplication.getOAuthToken();
+				new FavoriteTask(photo.getId(),StadtgefluesterDetailActivity.this).execute(oAuth);
 			}
 		});
 		
@@ -230,6 +205,11 @@ public class StadtgefluesterDetailActivity extends Activity {
 			}
 			return v;
 		}
+	}
+
+	public void commentWasUploaded(Comment comment) {
+		comments.add(comment);
+		commentAdapter.notifyDataSetChanged();
 	}
 
 	
